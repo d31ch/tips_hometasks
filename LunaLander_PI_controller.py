@@ -61,18 +61,10 @@ def start_game(environment, params, video_recorder=False):
         if video_recorder:
             video_recorder.capture_frame()
 
-        # случайное действие
-        # action = env.action_space.sample()
-
         # ПИ-регулятор
         action = pi(state, params)
         state, reward, done, info, _ = environment.step(action)
         total += reward
-
-        # print(state)  # ‘x’: 10 ‘y’: 6.666 ‘vx’: 5
-        # ‘vy’: 7.5 ‘angle’: 1 ‘angular velocity’: 2.5
-
-        # print(reward, done, info, action)
     return total
 
 
@@ -124,7 +116,6 @@ if __name__ == "__main__":
             print("Step:", steps, "Score:", score, "Params:", params_pd)
     else:
         vid = VideoRecorder(env, path=f"random_luna_lander_pi.mp4")
-        #params_pd = np.array([2.73756905,  0.61575823, -4.22383419, -0.57211289])
         score = start_game(env, params_pd, video_recorder=vid)
 
         vid.close()
