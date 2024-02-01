@@ -56,18 +56,10 @@ def start_game(environment, params, video_recorder=False):
         if video_recorder:
             video_recorder.capture_frame()
 
-        # случайное действие
-        # action = env.action_space.sample()
-
         # ПД-регулятор
         action = pid(state, params)
         state, reward, done, info, _ = environment.step(action)
         total += reward
-
-        # print(state)  # ‘x’: 10 ‘y’: 6.666 ‘vx’: 5
-        # ‘vy’: 7.5 ‘angle’: 1 ‘angular velocity’: 2.5
-
-        # print(reward, done, info, action)
     return total
 
 
